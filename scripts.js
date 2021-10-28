@@ -124,6 +124,10 @@ const Utils = {
 
     return `${signal} ${value}`;
   },
+
+  formatAmount(value) {
+    value = Number(value) * 100;
+  },
 };
 
 const Form = {
@@ -149,6 +153,12 @@ const Form = {
     ) {
       throw new Error("Por favor preencha todos os campos");
     }
+  },
+
+  formatValues() {
+    let { description, amount, date } = Form.getValues();
+
+    amount = Utils.formatAmount(amount);
   },
 
   submit(event) {
