@@ -128,6 +128,12 @@ const Utils = {
   formatAmount(value) {
     value = Number(value) * 100;
   },
+
+  formatDate(date) {
+    const splittedDate = date.split("-");
+
+    return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`;
+  },
 };
 
 const Form = {
@@ -159,6 +165,14 @@ const Form = {
     let { description, amount, date } = Form.getValues();
 
     amount = Utils.formatAmount(amount);
+
+    date = Utils.formatDate(date);
+
+    return {
+      description,
+      amount,
+      date,
+    };
   },
 
   submit(event) {
@@ -166,6 +180,8 @@ const Form = {
 
     try {
       Form.validateFields();
+
+      const transaction = Form.validateFields();
     } catch (error) {
       alert(error.message);
     }
