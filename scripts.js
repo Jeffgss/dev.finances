@@ -7,6 +7,19 @@ Modal = {
   },
 };
 
+const Storage = {
+  get() {
+    return JSON.parse(localStorage.getItem("dev.finances:transactions")) || [];
+  },
+
+  set(transactions) {
+    localStorage.setItem(
+      "dev.finances:transactions",
+      JSON.stringify(transactions)
+    );
+  },
+};
+
 const transactions = [
   {
     description: "Luz",
@@ -26,7 +39,7 @@ const transactions = [
 ];
 
 const Transaction = {
-  all: transactions,
+  all: Storage.get(),
 
   add(transaction) {
     Transaction.all.push(transaction);
@@ -198,19 +211,6 @@ const Form = {
     } catch (error) {
       alert(error.message);
     }
-  },
-};
-
-const Storage = {
-  get() {
-    return JSON.parse(localStorage.getItem("dev.finances:transactions")) || [];
-  },
-
-  set(transactions) {
-    localStorage.setItem(
-      "dev.finances:transactions",
-      JSON.stringify(transactions)
-    );
   },
 };
 
